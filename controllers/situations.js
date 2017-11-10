@@ -60,7 +60,6 @@ const deleteSituation = (id, callback) => {
       attributes (object): contains information for update. Must contain property id
       callback (function)
         err (boolean): true if error, undefined otherwise
-        situation (object): freshly updated situation, undefined if error
 
     RETURN
       none
@@ -80,6 +79,30 @@ const updateSituation = (attributes, callback) => {
     utterance: attributes.utterance
   }, {
     where: { id: attributes.id }
+  })
+  .then(s => callback(undefined, s))
+  .catch(err => {
+    console.error(err);
+    callback(true);
+  })
+};
+
+/*  Retrieve a situation.
+
+    PARAMS
+      id (string): id of the situation
+      callback (function)
+        err (boolean): true if error, undefined otherwise
+        situation (object): freshly updated situation, undefined if error
+
+    RETURN
+      none
+*/
+const getSituation = (id, callback) => {
+
+  situations
+  .findOne({
+    where: { id: id }
   })
   .then(s => callback(undefined, s))
   .catch(err => {
@@ -115,5 +138,6 @@ module.exports = {
   createSituation: createSituation,
   deleteSituation: deleteSituation,
   updateSituation: updateSituation,
+  getSituation: getSituation,
   getAllSituations: getAllSituations
 };

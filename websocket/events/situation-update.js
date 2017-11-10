@@ -18,9 +18,11 @@ const situationUpdate = (data, socket) => {
     return;
   }
 
-  situationsController.updateSituation(data, (err, situation) => {
+  situationsController.updateSituation(data, err => {
     if (!err) {
-      socket.emit('situation-updated', situation.dataValues);
+      situationsController.getSituation(data.id, (err, situation) => {
+        if (!err) socket.emit('situation-updated', situation.dataValues);
+      });
     }
   });
 };
