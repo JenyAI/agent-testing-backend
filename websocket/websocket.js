@@ -10,6 +10,8 @@ const setUpWebsocket = server => {
     socket.on('situation-create', data => eventHandler.situationCreate(data));
 
     socket.on('situation-delete', data => eventHandler.situationDelete(data));
+
+    socket.on('situation-get-all', data => eventHandler.situationGetAll(socket));
   });
 };
 
