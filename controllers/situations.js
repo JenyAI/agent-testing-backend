@@ -54,6 +54,40 @@ const deleteSituation = (id, callback) => {
   })
 };
 
+/*  Update a situation.
+
+    PARAMS
+      attributes (object): contains information for update. Must contain property id
+      callback (function)
+        err (boolean): true if error, undefined otherwise
+        situation (object): freshly updated situation, undefined if error
+
+    RETURN
+      none
+*/
+const updateSituation = (attributes, callback) => {
+  if (!callback) callback = () => { };
+
+  if (!attributes.id) {
+    console.error('missing information to update situation ', attributes);
+    callback(true);
+    return;
+  }
+
+  situations
+  .update({
+    intentName: attributes.intentName,
+    utterance: attributes.utterance
+  }, {
+    where: { id: attributes.id }
+  })
+  .then(s => callback(undefined, s))
+  .catch(err => {
+    console.error(err);
+    callback(true);
+  })
+};
+
 /*  Retrieve all situations.
 
     PARAMS
@@ -80,5 +114,6 @@ const getAllSituations = (callback) => {
 module.exports = {
   createSituation: createSituation,
   deleteSituation: deleteSituation,
+  updateSituation: updateSituation,
   getAllSituations: getAllSituations
 };

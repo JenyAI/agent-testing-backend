@@ -11,6 +11,8 @@ const setUpWebsocket = server => {
 
     socket.on('situation-delete', data => eventHandler.situationDelete(data, socket));
 
+    socket.on('situation-update', data => eventHandler.situationUpdate(data, socket));
+
     socket.on('situation-get-all', data => eventHandler.situationGetAll(socket));
   });
 };
