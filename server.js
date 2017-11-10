@@ -2,7 +2,7 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 
-const config = require('./configs/config');
+const env = require('./config/env');
 const router = require('./router');
 
 // configuration application =================
@@ -19,6 +19,6 @@ app.use((req, res, next) => {
 
 app.use('/', router);
 
-app.listen(config.port);
+app.listen(env.port);
 
-console.log(`server listening on port ${config.port}`);
+console.log(`server listening on port ${env.port}`);
