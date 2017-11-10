@@ -12,11 +12,6 @@ const situationsController = require('../../controllers/situations');
 */
 const situationCreate = (data) => {
 
-  if (!data.intentName || !data.utterance) {
-    console.error('missing attributes to create situation ', attributes);
-    return;
-  }
-
   situationsController.createSituation(data);
 };
 

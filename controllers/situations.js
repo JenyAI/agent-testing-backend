@@ -2,7 +2,7 @@
 
 const situations = require('../models').situations;
 
-/*  Creates a new situation.
+/*  Create a situation.
 
     PARAMS
       attributes (object): must contain
@@ -17,10 +17,40 @@ const situations = require('../models').situations;
 const createSituation = (attributes, callback) => {
   if (!callback) callback = () => { };
 
-  return situations
+  if (!attributes.intentName || !attributes.utterance) {
+    console.error('missing attributes to create situation ', attributes);
+    callback(true);
+    return;
+  }
+
+  situations
   .create({
     intentName: attributes.intentName,
-    utterance: attributes.utterance
+    utterance: attributes.utterance,
+  })
+  .then(s => callback(undefined, s))
+  .catch(err => {
+    console.error(err);
+    callback(true);
+  })
+};
+
+/*  Delete a situation.
+
+    PARAMS
+      id (string): id of the situation
+      callback (function)
+        err (boolean): true if error, undefined otherwise
+
+    RETURN
+      none
+*/
+const deleteSituation = (id, callback) => {
+  if (!callback) callback = () => { };
+
+  situations
+  .destroy({
+    where: { id: id }
   })
   .then(() => callback())
   .catch(err => {
@@ -30,5 +60,6 @@ const createSituation = (attributes, callback) => {
 };
 
 module.exports = {
-  createSituation: createSituation
+  createSituation: createSituation,
+  deleteSituation: deleteSituation
 };
