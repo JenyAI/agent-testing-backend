@@ -14,7 +14,7 @@ const situationsController = require('../../controllers/situations');
 const situationDelete = (data) => {
 
   if (!data.id) {
-    console.error('missing information to delete situation ', attributes);
+    console.error('missing information to delete situation ', data);
     return;
   }
 
