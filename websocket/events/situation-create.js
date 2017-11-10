@@ -6,11 +6,18 @@ const situationsController = require('../../controllers/situations');
 
     PARAMS
       data (object): contains information to create a situation
+        intentName (string)
+        utterance (string)
 
     RETURN
       none
 */
 const situationCreate = (data) => {
+
+  if (!data.intentName || !data.utterance) {
+    console.error('missing information to create situation ', attributes);
+    return;
+  }
 
   situationsController.createSituation(data);
 };
