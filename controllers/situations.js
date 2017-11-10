@@ -5,7 +5,7 @@ const situations = require('../models').situations;
 /*  Create a situation.
 
     PARAMS
-      attributes (object): must contain
+      attributes (object): can contain
         intentName (string): name of the intent the utterance must trigger
         utterance (string)
       callback (function)
@@ -17,12 +17,6 @@ const situations = require('../models').situations;
 */
 const createSituation = (attributes, callback) => {
   if (!callback) callback = () => { };
-
-  if (!attributes.intentName || !attributes.utterance) {
-    console.error('missing attributes to create situation ', attributes);
-    callback(true);
-    return;
-  }
 
   situations
   .create({

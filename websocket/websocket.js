@@ -7,9 +7,9 @@ const setUpWebsocket = server => {
 
   io.on('connection', socket => {
 
-    socket.on('situation-create', data => eventHandler.situationCreate(data));
+    socket.on('situation-create', data => eventHandler.situationCreate(data, socket));
 
-    socket.on('situation-delete', data => eventHandler.situationDelete(data));
+    socket.on('situation-delete', data => eventHandler.situationDelete(data, socket));
 
     socket.on('situation-get-all', data => eventHandler.situationGetAll(socket));
   });

@@ -5,21 +5,21 @@ const situationsController = require('../../controllers/situations');
 /*  Create a new situation.
 
     PARAMS
-      data (object): contains information to create a situation
+      data (object): can contain information
         intentName (string)
         utterance (string)
+      socket (object)
 
     RETURN
       none
 */
-const situationCreate = (data) => {
+const situationCreate = (data, socket) => {
 
-  if (!data.intentName || !data.utterance) {
-    console.error('missing information to create situation ', data);
-    return;
-  }
-
-  situationsController.createSituation(data);
+  situationsController.createSituation(data, (err, situation) => {
+    if (!err) {
+      socket.emit('situation-created', situation.dataValues);
+    }
+  });
 };
 
 module.exports = situationCreate;
