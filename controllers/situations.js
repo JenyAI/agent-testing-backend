@@ -10,6 +10,7 @@ const situations = require('../models').situations;
         utterance (string)
       callback (function)
         err (boolean): true if error, undefined otherwise
+        situation (object): freshly created situation, undefined if error
 
     RETURN
       none
@@ -59,7 +60,31 @@ const deleteSituation = (id, callback) => {
   })
 };
 
+/*  Retrieve all situations.
+
+    PARAMS
+      callback (function)
+        err (boolean): true if error, undefined otherwise
+        list (object): all situations, undefined if error
+
+    RETURN
+      none
+*/
+const getAllSituations = (callback) => {
+
+  situations
+  .findAll({
+    raw: true
+  })
+  .then(list => callback(undefined, list))
+  .catch(err => {
+    console.error(err);
+    callback(true);
+  })
+};
+
 module.exports = {
   createSituation: createSituation,
-  deleteSituation: deleteSituation
+  deleteSituation: deleteSituation,
+  getAllSituations: getAllSituations
 };
