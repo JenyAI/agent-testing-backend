@@ -4,6 +4,7 @@ let bodyParser = require('body-parser');
 
 const env = require('./config/env');
 const router = require('./router');
+const setUpWebsocket = require('./websocket/websocket');
 
 // configuration application =================
 
@@ -19,6 +20,9 @@ app.use((req, res, next) => {
 
 app.use('/', router);
 
-app.listen(env.port);
+let server = app.listen(env.port);
 
+// configuration websocket =================
+
+setUpWebsocket(server);
 console.log(`server listening on port ${env.port}`);
