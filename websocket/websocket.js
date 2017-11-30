@@ -24,6 +24,15 @@ const setUpWebsocket = server => {
     socket.on('skill-update', data => eventHandler.skillUpdate(data, socket));
 
     socket.on('skill-get-all', data => eventHandler.skillGetAll(socket));
+
+		// cards
+    socket.on('card-create', data => eventHandler.cardCreate(data, socket));
+
+    socket.on('card-delete', data => eventHandler.cardDelete(data, socket));
+
+    socket.on('card-update', data => eventHandler.cardUpdate(data, socket));
+
+    socket.on('card-get-all', data => eventHandler.cardGetAll(socket));
   });
 };
 
