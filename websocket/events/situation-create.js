@@ -1,6 +1,6 @@
 'use strict';
 
-const situationsController = require('../../controllers/situations');
+const situationsController = require('../../database/controllers/situations');
 
 /*  Create a new situation.
 

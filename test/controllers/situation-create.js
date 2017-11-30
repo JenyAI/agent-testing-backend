@@ -2,7 +2,7 @@
 
 let expect = require('chai').expect;
 
-const situationsController = require('../../controllers/situations');
+const situationsController = require('../../database/controllers/situations');
 
 describe('situation controller', () => {
   it('should create and delete a situation', done => {
@@ -46,5 +46,5 @@ describe('situation controller', () => {
       done();
     });
   });
-  
+
 });
