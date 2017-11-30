@@ -3,7 +3,6 @@ let app = express();
 let bodyParser = require('body-parser');
 
 const env = require('./config/env');
-const router = require('./router');
 const setUpWebsocket = require('./websocket/websocket');
 
 // configuration application =================
@@ -18,7 +17,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', router);
 
 let server = app.listen(env.port);
 
